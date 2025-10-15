@@ -34,7 +34,7 @@ void initialization() {
 
 	int width, height, nrChannels;
 	char filepath1[1024];
-	snprintf(filepath1, sizeof(filepath1), "%stextures\\container.jpg", RESOURCE_DIR);
+	snprintf(filepath1, sizeof(filepath1), "%stextures/container.jpg", RESOURCE_DIR);
 	unsigned char* data = stbi_load(filepath1, &width, &height, &nrChannels, 0);
 	if (data) {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -56,7 +56,7 @@ void initialization() {
 
 	stbi_set_flip_vertically_on_load(true);
 	char filepath2[512];
-	snprintf(filepath2, sizeof(filepath2), "%stextures\\awesomeface.png", RESOURCE_DIR);
+	snprintf(filepath2, sizeof(filepath2), "%stextures/awesomeface.png", RESOURCE_DIR);
 	unsigned char* data1 = stbi_load(filepath2, &width, &height, &nrChannels, 0);
 	if (data) {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data1);
