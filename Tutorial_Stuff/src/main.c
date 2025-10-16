@@ -34,7 +34,7 @@ int main() {
 		processInputs(window);
 
 		clearBufferGreen();
-		drawObjects();
+		drawObjects(); // TODO: make an actual render loop
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
