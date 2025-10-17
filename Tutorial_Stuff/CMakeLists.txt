@@ -21,6 +21,8 @@ set(LIB_SOURCES ${LIB_INCLUDE_GLFW}
 	${LIB_GLAD_H}
 )
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
+
 # Add source to this project's executable.
 include_directories("./include/")
 add_executable (Tutorial_Stuff ${LIB_SOURCES} ${SOURCES})

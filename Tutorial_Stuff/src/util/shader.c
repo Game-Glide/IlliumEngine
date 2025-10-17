@@ -10,7 +10,8 @@ void create_shader(Shader *shader, const char *vshader_name, const char *fshader
     strcat(v_filepath, vshader_name);
     shader->vertex_shader_code = read_file(v_filepath);
     unsigned int v_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(v_shader, 1, &shader->vertex_shader_code, NULL);
+    const char* v_shader_source = shader->vertex_shader_code;
+    glShaderSource(v_shader, 1, &v_shader_source, NULL);
     glCompileShader(v_shader);
     glGetShaderiv(v_shader, GL_COMPILE_STATUS, &success);
     if (!success) {
@@ -23,7 +24,8 @@ void create_shader(Shader *shader, const char *vshader_name, const char *fshader
     strcat(f_filepath, fshader_name);
     shader->fragment_shader_code = read_file(f_filepath);
     unsigned int f_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(f_shader, 1, &shader->fragment_shader_code, NULL);
+    const char* f_shader_source = shader->fragment_shader_code;
+    glShaderSource(f_shader, 1, &f_shader_source, NULL);
     glCompileShader(f_shader);
     glGetShaderiv(f_shader, GL_COMPILE_STATUS, &success);
     if (!success) {

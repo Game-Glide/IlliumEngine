@@ -123,12 +123,28 @@ void initialization() {
 }
 
 void drawObjects() {
-	mat4 trans;
-	glm_mat4_identity(trans);
-	glm_translate(trans, (vec3) {0.5f, -0.5f, 1.0f});
-	glm_rotate(trans, sin((float)glfwGetTime()), (vec3) {0.0f, 0.0f, 1.0f});
-	set_shader_matrix_4fv(_defaultShader, "transform", trans);
+	// Model matrix - local to world space
+	mat4 model;
+	mat4 view; // View matrix - world space to eye space
+	mat4 projection; // Projection matrix - eye space to clip space
 
+	glm_mat4_identity(model);
+	glm_rotate(model, glm_rad(-55.0f), (vec3) {1.0f, 0.0f, 0.0f});
+
+	glm_mat4_identity(view);
+	glm_translate(view, (vec3) {0.0f, 0.0f, -3.0f});
+
+	glm_mat4_identity(projection);
+	glm_perspective(glm_rad(45.0f), (float)800/(float)600, 0.1f, 100.0f, projection);
+
+	// Send to shader
+	set_shader_matrix_4fv(_defaultShader, "model", model);
+	set_shader_matrix_4fv(_defaultShader, "view", view);
+	set_shader_matrix_4fv(_defaultShader, "projection", projection);
+	// Transformation testing
+	// glm_translate(trans, (vec3) {0.5f, -0.5f, 1.0f});
+	// glm_rotate(trans, sin((float)glfwGetTime()), (vec3) {0.0f, 0.0f, 1.0f});
+	
 	*mixFactor = sin((float)glfwGetTime())/2;
 	set_shader_float(_defaultShader, "mixFactor", *mixFactor);
 
