@@ -25,7 +25,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
 
 # Add source to this project's executable.
 include_directories("./include/")
-add_executable (Tutorial_Stuff ${LIB_SOURCES} ${SOURCES})
+add_executable(Tutorial_Stuff ${LIB_SOURCES} ${SOURCES})
 set_property(TARGET Tutorial_Stuff PROPERTY C_STANDARD 99)
 set_property(TARGET Tutorial_Stuff PROPERTY C_STANDARD_REQUIRED ON)
 

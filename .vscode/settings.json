@@ -67,7 +67,9 @@
     "stdlib.h": "c",
     "ratio": "cpp",
     "stop_token": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "cglm.h": "c",
+    "camera.h": "c"
   },
   "C_Cpp.errorSquiggles": "enabled"
 }

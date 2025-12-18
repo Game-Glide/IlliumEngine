@@ -1,6 +1,9 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-// Absolutely nothing lmfao
+extern float deltaTime;
+extern float lastFrame;
+extern int firstMouse;
+extern float fov;
 
 #endif

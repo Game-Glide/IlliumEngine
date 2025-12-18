@@ -5,11 +5,17 @@
 #include <stb_image.h>
 #include <GLFW/glfw3.h>
 #include <string.h>
+#define CAMERA_CONST_H
+#define CAMERA_VARS_H
+#include <engine/camera.h>
+#include "main.h"
 
 #include <cglm/cglm.h>
 
 Shader* _defaultShader = NULL;
 float* mixFactor = NULL;
+
+float fov = 45.0f;
 
 void clearBufferGreen() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -19,6 +25,10 @@ void clearBufferGreen() {
 void initialization() {
     // WIREFRAME MODE
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    vec3 camera_pos = {0.0f, 0.0f, 3.0f};
+    vec3 camera_front = {0.0f, 0.0f, -1.0f};
+    vec3 camera_up = {0.0f, 1.0f, 0.0f};
+    init_camera(camera_pos, camera_front, camera_up);
     glEnable(GL_DEPTH_TEST);
 
 #pragma region Load Textures
@@ -68,7 +78,6 @@ void initialization() {
     }
     stbi_image_free(data1);
 #pragma endregion
-
 
 #pragma region Shader Creation
     Shader* defaultShader = malloc(sizeof(Shader));
@@ -143,7 +152,7 @@ void initialization() {
 
     // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0); 
+    glEnableVertexAttribArray(0);
     // texture coord attribute
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
@@ -166,17 +175,17 @@ void drawObjects() {
     *mixFactor = sin((float)glfwGetTime())/2;
     set_shader_float(_defaultShader, "mixFactor", *mixFactor);
 
-    mat4 view; // View matrix - world space to eye space
+    update_camera(view_mat); // Update View matrix - world space to eye space
     mat4 projection; // Projection matrix - eye space to clip space
 
-    glm_mat4_identity(view);
-    glm_translate(view, (vec3) {0.0f, 0.0f, -3.0f});
+    // glm_mat4_identity(view);
+    // glm_translate(view, (vec3) {0.0f, 0.0f, -3.0f});
 
     glm_mat4_identity(projection);
-    glm_perspective(glm_rad(45.0f), (float)800/(float)600, 0.1f, 100.0f, projection);
+    glm_perspective(glm_rad(fov), (float)800/(float)600, 0.1f, 100.0f, projection);
 
     // Send to shader
-    set_shader_matrix_4fv(_defaultShader, "view", view);
+    set_shader_matrix_4fv(_defaultShader, "view", view_mat);
     set_shader_matrix_4fv(_defaultShader, "projection", projection);
 
     for (int i = 0; i < 10; i++) {
@@ -197,7 +206,21 @@ void drawObjects() {
     }
 }
 
+
 void cleanup() {
     free(_defaultShader);
     free(mixFactor);
+    free(CAMERA_POS);
+    free(CAMERA_FRONT);
+    free(CAMERA_UP);
+    free(yaw);
+    free(pitch);
+
+    _defaultShader = NULL;
+    mixFactor = NULL;
+    CAMERA_POS = NULL;
+    CAMERA_FRONT = NULL;
+    CAMERA_UP = NULL;
+    yaw = NULL;
+    pitch = NULL;
 }
