@@ -20,7 +20,7 @@ int main() {
 		printf("Failed to create GLFW window\n");
 		glfwTerminate();
 	return -1;
-}
+	}
 
 	glfwMakeContextCurrent(window);
 	

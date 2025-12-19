@@ -25,13 +25,13 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
 
 # Add source to this project's executable.
 include_directories("./include/")
-add_executable(Tutorial_Stuff ${LIB_SOURCES} ${SOURCES})
-set_property(TARGET Tutorial_Stuff PROPERTY C_STANDARD 99)
-set_property(TARGET Tutorial_Stuff PROPERTY C_STANDARD_REQUIRED ON)
+add_executable(IlliumEngine ${LIB_SOURCES} ${SOURCES})
+set_property(TARGET IlliumEngine PROPERTY C_STANDARD 99)
+set_property(TARGET IlliumEngine PROPERTY C_STANDARD_REQUIRED ON)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Tutorial_Stuff PROPERTY CXX_STANDARD 20)
+  set_property(TARGET IlliumEngine PROPERTY CXX_STANDARD 20)
 endif()
 
 # TODO: Add tests and install targets if needed.
-target_link_libraries(Tutorial_Stuff glfw)
+target_link_libraries(IlliumEngine glfw)
