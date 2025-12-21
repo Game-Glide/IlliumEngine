@@ -1,18 +1,14 @@
-﻿# CMakeList.txt : CMake project for Tutorial_Stuff, include source and define
-# project specific logic here.
-#
-
-set(SOURCE_DIR "./src")
+﻿set(SOURCE_DIR "./src")
 file(GLOB_RECURSE SOURCES
     "${SOURCE_DIR}/*.cpp"
 	"${SOURCE_DIR}/*.c"
     "${SOURCE_DIR}/*.h"
 )
-set(LIB_INCLUDE_GLFW "include/GLFW/glfw3.h")
-set(LIB_INCLUDE_GLFW_NATIVE "include/GLFW/glfw3native.h")
-set(LIB_INCLUDE_KHR "include/KHR/khrplatform.h")
-set(LIB_GLAD_C "glad.c")
-set(LIB_GLAD_H "include/glad/glad.h")
+set(LIB_INCLUDE_GLFW "vendor/GLFW/glfw3.h")
+set(LIB_INCLUDE_GLFW_NATIVE "vendor/GLFW/glfw3native.h")
+set(LIB_INCLUDE_KHR "vendor/KHR/khrplatform.h")
+set(LIB_GLAD_C "vendor/glad.c")
+set(LIB_GLAD_H "vendor/glad/glad.h")
 
 set(LIB_SOURCES ${LIB_INCLUDE_GLFW}
 	${LIB_INCLUDE_GLFW_NATIVE}
@@ -25,6 +21,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror")
 
 # Add source to this project's executable.
 include_directories("./include/")
+include_directories("./vendor/")
 add_executable(IlliumEngine ${LIB_SOURCES} ${SOURCES})
 set_property(TARGET IlliumEngine PROPERTY C_STANDARD 99)
 set_property(TARGET IlliumEngine PROPERTY C_STANDARD_REQUIRED ON)
